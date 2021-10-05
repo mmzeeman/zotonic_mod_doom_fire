@@ -1,0 +1,11 @@
+{application, zotonic_mod_doom_fire, [
+    {description, "Provide a module which animates a doom fire on server side"},
+    {vsn, "git"},
+    {registered, []},
+    {applications, [kernel, stdlib, zotonic_core]},
+    {env, []},
+    {modules, []},
+    {maintainers, []},
+    {licenses, ["Apache 2.0"]},
+    {links, [{"GitHub", "https://github.com/mmzeeman/zotonic_mod_doom_fire"}]}
+]}.

@@ -1,0 +1,3 @@
+[
+  {doom_fire, ["doom-fire"], controller_template, [{template, "doom_fire.tpl"}]}
+].
