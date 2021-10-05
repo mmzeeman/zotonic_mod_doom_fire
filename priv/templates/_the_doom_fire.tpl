@@ -1,8 +1,8 @@
 <table cellpadding="0" cellspacing="0" style="margin: 10px auto;">
-    {% for y in 1|range:height %}
+    {% for row in m.doom_fire.rows %}
         <tr>
-            {% for x in 1|range:width %} 
-            <td class="pixel color-{{ m.doom_fire.pixel[x][y] }}"></td>
+            {% for intensity in row %} 
+                <td class="pixel color-{{ intensity }}"></td>
             {% endfor %}
         </tr>
     {% endfor %}
