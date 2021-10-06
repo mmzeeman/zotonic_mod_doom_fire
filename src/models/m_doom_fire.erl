@@ -29,6 +29,16 @@
     m_post/3
 ]).
 
+-export([
+    new/2
+]).
+
+-record(doom_fire, {
+    width=60  :: non_neg_integer(),
+    height=40 :: non_neg_integer(),
+    pixels    :: array:array()
+}).
+
 m_get([<<"rows">> | Rest], _Msg, _Context) ->
     Rows = rows(60, 35),
     {ok, {Rows, Rest}};
@@ -40,6 +50,18 @@ m_get(V, _Msg, _Context) ->
 m_post(Topic, _Msg, _Context) ->
     ?DEBUG(Topic),
     ok.
+
+%% Create a new doom fire data structure
+new(Width, Height) ->
+    #doom_fire{width=Width,
+               height=Height,
+               pixels=array:new([{fixed, true}, 
+                                 {size, Width*Height},
+                                 {default, 0}])}.
+
+%%
+%% Helpers
+%%
 
 rows(Width, Height) ->
     [row(Width) || _N <- lists:seq(1, Height)].
