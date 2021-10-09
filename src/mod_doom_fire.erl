@@ -35,42 +35,25 @@ init(_Context) ->
     ok.
 
 %% Observe initialization of the doom_fire teleview.
-observe_teleview_state_init({teleview_state_init, #{ type := doom_fire, tick := Tick }=Args}, Context) ->
-    trigger_tick(Tick, Context),
-    %% Get the initial state of the fire.
+observe_teleview_state_init({teleview_state_init, #{ width := Width,
+                                                     height := Height,
+                                                     type := doom_fire } = Args}, Context) ->
+    %% Add the initial state of the fire to the args.
+    Fire = m_doom_fire:new(Width, Height),
+    Fire1 = m_doom_fire:add_fire_source(Fire),
 
-    undefined;
+    Args1 = Args#{doom_fire => Fire1},
+
+    {ok, Args1, z_acl:anondo(z_context:prune_for_scomp(Context))};
 observe_teleview_state_init({teleview_state_init, #{ }=A}, _Context) ->
     undefined.
 
 %% Observe render trigger of the doom_fire teleview
-observe_teleview_render({teleview_render, Id, Msg, #{ type := doom_fire, tick := Tick }}, Context) ->
-    trigger_tick(Tick, Context),
-    undefined;
+observe_teleview_render({teleview_render, Id, #{ tick := _Tick }, #{ type := doom_fire, doom_fire := Fire} = Args}, Context) ->
+    %% When there is a tick, do a fire propagation
+    Fire1 = m_doom_fire:fire_propagation(Fire),
+    Args#{doom_fire := Fire1};
 observe_teleview_render({teleview_render, _Id, _Msg, #{}}, _Context) ->
     undefined.
-
-
-observe_acl_is_allowed(#acl_is_allowed{action=subscribe,
-                                      object=#acl_mqtt{topic = [<<"model">>, <<"doom_fire">>, <<"event">> | SessionTopic ]}}, Context) ->
-    is_event_subscribe_allowed(SessionTopic, Context);
-observe_acl_is_allowed(_E, _Context) ->
-    undefined.
-
-%%
-%% Helpers
-%%
-
-trigger_tick(After, Context) ->
-    timer:apply_after(After, ?MODULE, tick, [After, Context]).
-
-tick(After, Context) ->
-    ?DEBUG(tick),
-    %% Publish a doom_fire event tick. This will trigger a new render.
-    z_mqtt:publish([model, doom_fire, event, tick], #{}, z_acl:sudo(Context)).
-
-% Everybody is allowed to subscribe to ticks
-is_event_subscribe_allowed([<<"tick">>|_], _Context) -> true;
-is_event_subscribe_allowed(_, _Context) -> false.
 
 

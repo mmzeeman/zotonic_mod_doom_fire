@@ -31,7 +31,10 @@
 
 -export([
     new/2,
-    fire_propagation/1
+    fire_propagation/1,
+    add_fire_source/1,
+
+    split_in_rows/2
 ]).
 
 -record(doom_fire, {
@@ -40,8 +43,8 @@
     pixels    :: array:array()
 }).
 
-m_get([<<"rows">> | Rest], _Msg, _Context) ->
-    Rows = rows(60, 35),
+m_get([<<"rows">>, #doom_fire{width=Width, pixels=Pixels} | Rest], _Msg, _Context) ->
+    Rows = split_in_rows(array:to_list(Pixels), Width),
     {ok, {Rows, Rest}};
 
 m_get(V, _Msg, _Context) ->
@@ -75,10 +78,32 @@ fire_propagation(#doom_fire{width=Width, height=Height, pixels=Pixels}=Fire) ->
                           Pixels),
     Fire#doom_fire{pixels=NewPixels}.
 
+%% Add the fire source.
+add_fire_source(#doom_fire{width=Width, height=Height, pixels=Pixels}=Fire) ->
+    OverflowIndex = Width * Height,
+    StartIndex = OverflowIndex - Width,
+    Pixels1 = lists:foldl(
+                fun(Index, FirePixels) ->
+                        array:set(Index, 36, FirePixels)
+                end,
+                Pixels,
+                lists:seq(StartIndex, OverflowIndex-1)),
+    Fire#doom_fire{pixels=Pixels1}.
 
 %%
 %% Helpers
 %%
+
+split_in_rows(List, Width) ->
+    split_in_rows(List, Width, []).
+
+split_in_rows(List, Width, Acc) when length(List) =< Width ->
+    lists:reverse([List | Acc]);
+
+split_in_rows(List, Width, Acc) ->
+    {Row, Rest} = lists:split(Width, List),
+    split_in_rows(Rest, Width, [ Row | Acc]).
+
 
 rows(Width, Height) ->
     [row(Width) || _N <- lists:seq(1, Height)].
