@@ -30,7 +30,8 @@
 ]).
 
 -export([
-    new/2
+    new/2,
+    fire_propagation/1
 ]).
 
 -record(doom_fire, {
@@ -58,6 +59,22 @@ new(Width, Height) ->
                pixels=array:new([{fixed, true}, 
                                  {size, Width*Height},
                                  {default, 0}])}.
+
+%% Calculate one step in the fire propagation
+fire_propagation(#doom_fire{width=Width, height=Height, pixels=Pixels}=Fire) ->
+    NewPixels = array:map(fun(I, Intensity) ->
+                                  case I + Width of
+                                      Overflow when Overflow >= Width * Height ->
+                                          Intensity;
+                                      BelowIndex ->
+                                          IntensityBelow = array:get(BelowIndex, Pixels),
+                                          Decay = erlang:round(math:floor(rand:uniform() * 3)),
+                                          max(IntensityBelow - Decay, 0)
+                                  end
+                          end,
+                          Pixels),
+    Fire#doom_fire{pixels=NewPixels}.
+
 
 %%
 %% Helpers
