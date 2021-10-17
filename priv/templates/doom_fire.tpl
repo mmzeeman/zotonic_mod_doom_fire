@@ -17,10 +17,11 @@
              type=`doom_fire`
              template="_the_doom_fire.tpl"
              width=60
-             height=35
-             tick=70
+             height=40
 
-             vary=%{ }
+             tick=42
+             differ_min_time=30000
+             differ_max_time=120000
         %}
     </body>
 

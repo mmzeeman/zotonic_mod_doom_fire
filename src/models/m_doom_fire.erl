@@ -71,7 +71,7 @@ fire_propagation(#doom_fire{width=Width, height=Height, pixels=Pixels}=Fire) ->
                                           Intensity;
                                       BelowIndex ->
                                           IntensityBelow = array:get(BelowIndex, Pixels),
-                                          Decay = erlang:round(math:floor(rand:uniform() * 3)),
+                                          Decay = rand:uniform(4) - 1,
                                           max(IntensityBelow - Decay, 0)
                                   end
                           end,
