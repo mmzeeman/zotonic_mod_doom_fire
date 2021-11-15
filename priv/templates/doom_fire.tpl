@@ -20,8 +20,9 @@
              height=40
 
              tick=42
-             differ_min_time=30000
-             differ_max_time=120000
+
+             keyframe_min_time=30000
+             keyframe_max_time=120000
         %}
     </body>
 
