@@ -6,4 +6,4 @@ Based on [Doom Fire Algorithm](https://github.com/filipedeschamps/doom-fire-algo
 and [Elixir Doom Fire](https://github.com/allmonty/elixir-live-doom-fire)
 
 
-
+<img width="686" alt="Screenshot 2022-02-20 at 10 49 33" src="https://user-images.githubusercontent.com/1024972/154837147-7df68772-008f-4999-b597-b1517e658ae0.png">
