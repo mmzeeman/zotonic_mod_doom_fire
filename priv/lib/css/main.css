@@ -1,0 +1,56 @@
+body {
+    background-color: #270000 !important;
+    color: rgb(191, 159, 31) !important;
+    font-weight: bold;
+    font-family: arial;
+    font-size: 10px;
+    text-align: center;
+}
+
+td {
+    width: 8px;
+    height: 8px;
+    color: #FFF;
+    border: 1px solid #000;
+    vertical-align: center;
+    position: relative;
+}
+
+
+.c0 { background-color: rgb(7, 7, 7) }
+.c1 { background-color: rgb(31, 7, 7) }
+.c2 { background-color: rgb(47, 15, 7) }
+.c3 { background-color: rgb(71, 15, 7) }
+.c4 { background-color: rgb(87, 23, 7) }
+.c5 { background-color: rgb(103, 31, 7) }
+.c6 { background-color: rgb(119, 31, 7) }
+.c7 { background-color: rgb(143, 39, 7) }
+.c8 { background-color: rgb(159, 47, 7) }
+.c9 { background-color: rgb(175, 63, 7) }
+.c10 { background-color: rgb(191, 71, 7) }
+.c11 { background-color: rgb(199, 71, 7) }
+.c12 { background-color: rgb(223, 79, 7) }
+.c13 { background-color: rgb(223, 87, 7) }
+.c14 { background-color: rgb(223, 87, 7) }
+.c15 { background-color: rgb(215, 95, 7) }
+.c16 { background-color: rgb(215, 95, 7) }
+.c17 { background-color: rgb(215, 103, 15) }
+.c18 { background-color: rgb(207, 111, 15) }
+.c19 { background-color: rgb(207, 119, 15) }
+.c20 { background-color: rgb(207, 127, 15) }
+.c21 { background-color: rgb(207, 135, 23) }
+.c22 { background-color: rgb(199, 135, 23) }
+.c23 { background-color: rgb(199, 143, 23) }
+.c24 { background-color: rgb(199, 151, 31) }
+.c25 { background-color: rgb(191, 159, 31) }
+.c26 { background-color: rgb(191, 159, 31) }
+.c27 { background-color: rgb(191, 167, 39) }
+.c28 { background-color: rgb(191, 167, 39) }
+.c29 { background-color: rgb(191, 175, 47) }
+.c30 { background-color: rgb(183, 175, 47) }
+.c31 { background-color: rgb(183, 183, 47) }
+.c32 { background-color: rgb(183, 183, 55) }
+.c33 { background-color: rgb(207, 207, 111) }
+.c34 { background-color: rgb(223, 223, 159) }
+.c35 { background-color: rgb(239, 239, 199) }
+.c36 { background-color: rgb(255, 255, 255) }

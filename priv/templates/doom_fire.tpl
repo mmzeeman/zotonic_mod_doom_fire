@@ -19,9 +19,9 @@
              width=60
              height=40
 
-             tick=42
-             differ_min_time=30000
-             differ_max_time=120000
+             tick=50
+             keyframe_min_time=60000
+             keyframe_max_time=120000
         %}
     </body>
 
