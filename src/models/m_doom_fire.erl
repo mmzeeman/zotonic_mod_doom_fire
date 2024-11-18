@@ -46,9 +46,8 @@
 m_get([<<"rows">>, #doom_fire{width=Width, pixels=Pixels} | Rest], _Msg, _Context) ->
     Rows = split_in_rows(array:to_list(Pixels), Width),
     {ok, {Rows, Rest}};
-
 m_get(V, _Msg, _Context) ->
-    lager:info("Unknown ~p lookup: ~p", [?MODULE, V]),
+    ?LOG_WARNING("Unknown ~p lookup: ~p", [?MODULE, V]),
     {error, unknown_path}.
 
 m_post(Topic, _Msg, _Context) ->
@@ -71,7 +70,7 @@ fire_propagation(#doom_fire{width=Width, height=Height, pixels=Pixels}=Fire) ->
                                           Intensity;
                                       BelowIndex ->
                                           IntensityBelow = array:get(BelowIndex, Pixels),
-                                          Decay = rand:uniform(4) - 1,
+                                          Decay = rand:uniform(3) - 1,
                                           max(IntensityBelow - Decay, 0)
                                   end
                           end,
@@ -103,7 +102,6 @@ split_in_rows(List, Width, Acc) when length(List) =< Width ->
 split_in_rows(List, Width, Acc) ->
     {Row, Rest} = lists:split(Width, List),
     split_in_rows(Rest, Width, [ Row | Acc]).
-
 
 rows(Width, Height) ->
     [row(Width) || _N <- lists:seq(1, Height)].

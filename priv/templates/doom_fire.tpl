@@ -16,12 +16,12 @@
         {% teleview 
              type=`doom_fire`
              template="_the_doom_fire.tpl"
-             width=60
-             height=40
+             width=100
+             height=50
 
-             tick=50
-             keyframe_min_time=60000
-             keyframe_max_time=120000
+             tick=100
+             keyframe_min_time=10000
+             keyframe_max_time=30000
         %}
     </body>
 
